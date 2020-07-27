@@ -1,3 +1,6 @@
+autoload -Uz compinit
+compinit
+
 # ------------------------------------------------------------------------PATH------------------------------------------------------------------------
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
@@ -80,7 +83,7 @@ source /usr/local/share/zsh/site-functions/_aws
 source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 
 # for kind completion
-source <(kind completion zsh)
+# source <(kind completion zsh)
 
 # gcloud
 export PATH=$PATH:/opt/google-cloud-sdk/bin
@@ -123,6 +126,7 @@ alias k="kubectl"
 alias mk="minikube"
 
 source <(kubectl completion zsh)
+complete -F __start_kubectl k
 
 alias kctx="kubectx"
 alias kns="kubens"
@@ -130,4 +134,14 @@ alias kns="kubens"
 alias gcl="gcloud"
 
 alias v="vagrant"
+
+# for terraform
+alias tf="terraform"
+
+# for asdf
+. $HOME/.asdf/asdf.sh
+fpath=(${ASDF_DIR}/completions $fpath)
+autoload -Uz compinit
+compinit
+complete -o nospace -C /Users/ketch/.asdf/installs/terraform/0.12.29/bin/terraform terraform
 # ------------------------------------------------------------------------Alias------------------------------------------------------------------------
